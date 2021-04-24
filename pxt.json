@@ -1,5 +1,5 @@
 {
-    "name": "MRJ-TMC2020-F5B3-FarSal01",
+    "name": "Far_Car",
     "description": "",
     "dependencies": {
         "core": "*",
