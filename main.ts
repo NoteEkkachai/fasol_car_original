@@ -45,37 +45,46 @@ function Trac_ms_Speed () {
 function Can1 () {
     basic.showIcon(IconNames.StickFigure)
     Robot_Start()
-    for (let index = 0; index < 4; index++) {
-        TracJC()
-        Straight100ms()
-    }
-    TracJC()
-    Turn_Left()
-    TracJC()
-    Turn_Left()
     for (let index = 0; index < 3; index++) {
         TracJC()
         Straight100ms()
     }
     TracJC()
-    Turn_Right()
-    TracJC()
-    Turn_Right()
+    Turn_Left()
     TracJC()
     Turn_Left()
-    TracJC_Slow_Stop()
-    GripDown()
-    Grip()
-    GripUp()
-    UTurn_Left()
-    TracJC()
-    Turn_Right()
+    for (let index = 0; index < 2; index++) {
+        TracJC()
+        Straight100ms()
+    }
     TracJC()
     Turn_Left()
     TracJC()
     Straight100ms()
     TracJC()
     Turn_Left()
+    TracJC()
+    Turn_Right()
+    TracJC_Slow_Stop()
+    GripDown()
+    Grip()
+    GripUp()
+    UTurn_Left()
+    TracJC()
+    Turn_Left()
+    TracJC()
+    Turn_Right()
+    TracJC()
+    Turn_Right()
+    TracJC()
+    for (let index = 0; index < 3; index++) {
+        Straight100ms()
+        TracJC()
+    }
+    for (let index = 0; index < 2; index++) {
+        Turn_Left()
+        TracJC()
+    }
     GotoPut()
 }
 input.onButtonPressed(Button.A, function () {
@@ -129,19 +138,19 @@ function Show8ADC () {
     Read5ADC()
     Read3ADC_Back()
     basic.showNumber(L2)
-    basic.pause(1000)
+    basic.pause(5000)
     basic.showNumber(L1)
-    basic.pause(1000)
+    basic.pause(5000)
     basic.showNumber(C)
-    basic.pause(1000)
+    basic.pause(5000)
     basic.showNumber(R1)
-    basic.pause(1000)
+    basic.pause(5000)
     basic.showNumber(R2)
-    basic.pause(1000)
+    basic.pause(5000)
     basic.showNumber(BL)
-    basic.pause(1000)
+    basic.pause(5000)
     basic.showNumber(BC)
-    basic.pause(1000)
+    basic.pause(5000)
     basic.showNumber(BR)
 }
 function Trac () {
@@ -302,36 +311,53 @@ function Right () {
     iBIT.Spin(ibitSpin.Right, Speed)
 }
 function Can2 () {
-    Backward()
-    basic.pause(200)
-    UTurn_Right()
+    UTurn_Left()
+    for (let index = 0; index < 2; index++) {
+        TracJC()
+        Turn_Left()
+    }
     for (let index = 0; index < 2; index++) {
         TracJC()
         Straight100ms()
     }
+    for (let index = 0; index < 2; index++) {
+        TracJC()
+        Turn_Right()
+    }
+    for (let index = 0; index < 3; index++) {
+        TracJC()
+        Straight100ms()
+    }
+    for (let index = 0; index < 2; index++) {
+        TracJC()
+        Turn_Left()
+    }
     TracJC()
-    Turn_Right()
+    Straight100ms()
+    TracJC()
+    Turn_Left()
+    TracJC_Slow_Stop()
+    GripDown()
+    Grip()
+    GripUp()
+    UTurn_Left()
     TracJC()
     Turn_Right()
     TracJC()
     Straight100ms()
     TracJC()
-    Turn_Left()
     for (let index = 0; index < 2; index++) {
+        TracJC()
+        Turn_Right()
+    }
+    for (let index = 0; index < 3; index++) {
         TracJC()
         Straight100ms()
     }
-    TracJC_Slow_Stop()
-    GripDown()
-    Grip()
-    GripUp()
-    UTurn_Right()
     for (let index = 0; index < 2; index++) {
         TracJC()
-        Straight100ms()
+        Turn_Left()
     }
-    TracJC()
-    Turn_Right()
     GotoPut()
 }
 function Read3ADC_Back () {
@@ -390,15 +416,13 @@ function Initial_Speed () {
     Max_Speed = Base_Speed
 }
 function GotoPut () {
-    TracJC()
-    Straight100ms()
-    TracJC()
-    Turn_Left()
-    TracJC()
-    Turn_Left()
     for (let index = 0; index < 2; index++) {
         TracJC()
         Straight100ms()
+    }
+    for (let index = 0; index < 2; index++) {
+        TracJC()
+        Turn_Right()
     }
     TracJC_Stop()
     GripDown()
@@ -452,14 +476,14 @@ Kp = 8
 Kd = 30
 Ki = 0
 Kt = 10
-Ref_L2 = 2700
-Ref_L1 = 2700
-Ref_C = 2700
-Ref_R1 = 2700
-Ref_R2 = 2700
-Ref_BL = 2700
-RefBC = 2700
-Ref_BR = 2700
+Ref_L2 = 3608
+Ref_L1 = 2865
+Ref_C = 3132
+Ref_R1 = 3251
+Ref_R2 = 2424
+Ref_BL = 3852
+RefBC = 3514
+Ref_BR = 3571
 GripDown()
 Grip()
 basic.showIcon(IconNames.Heart)
