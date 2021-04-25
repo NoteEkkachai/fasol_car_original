@@ -19,7 +19,7 @@ function Turn_Right () {
 }
 function Straight100ms () {
     Forward()
-    basic.pause(100)
+    basic.pause(200)
 }
 function Forward () {
     iBIT.Motor2(ibitMotor.Forward, Base_Left_Speed, Base_Right_Speed)
@@ -43,16 +43,16 @@ function Trac_ms_Speed () {
     Kd += -40
 }
 function Can1 () {
-    basic.showIcon(IconNames.StickFigure)
+    basic.showIcon(IconNames.Yes)
     Robot_Start()
     for (let index = 0; index < 3; index++) {
         TracJC()
         Straight100ms()
     }
-    TracJC()
-    Turn_Left()
-    TracJC()
-    Turn_Left()
+    for (let index = 0; index < 2; index++) {
+        TracJC()
+        Turn_Left()
+    }
     for (let index = 0; index < 2; index++) {
         TracJC()
         Straight100ms()
@@ -65,8 +65,8 @@ function Can1 () {
     Turn_Left()
     TracJC()
     Turn_Right()
+    GripDown2()
     TracJC_Slow_Stop()
-    GripDown()
     Grip()
     GripUp()
     UTurn_Left()
@@ -81,15 +81,16 @@ function Can1 () {
         Straight100ms()
         TracJC()
     }
-    for (let index = 0; index < 2; index++) {
-        Turn_Left()
-        TracJC()
-    }
+    Turn_Left()
+    TracJC()
+    Turn_Left()
     GotoPut()
 }
 input.onButtonPressed(Button.A, function () {
     Can1()
     Can2()
+    Can3()
+    Can4()
     Stop()
 })
 function UTurn_Left () {
@@ -129,29 +130,74 @@ function Turn_Left () {
     iBIT.MotorStop()
     basic.pause(10)
 }
+function Can3 () {
+    UTurn_Right()
+    for (let index = 0; index < 2; index++) {
+        TracJC()
+        Turn_Left()
+    }
+    for (let index = 0; index < 2; index++) {
+        TracJC()
+        Straight100ms()
+    }
+    TracJC()
+    Turn_Right()
+    TracJC()
+    Turn_Left()
+    GripDown2()
+    TracJC_Slow_Stop()
+    Grip()
+    GripUp()
+    UTurn_Left()
+    TracJC()
+    Turn_Right()
+    TracJC()
+    Turn_Left()
+    GotoPut()
+}
 function Put () {
     iBIT.MotorStop()
     iBIT.Servo(ibitServo.SV1, 150)
     basic.pause(300)
 }
+function Can4 () {
+    UTurn_Right()
+    for (let index = 0; index < 2; index++) {
+        TracJC()
+        Turn_Left()
+    }
+    for (let index = 0; index < 3; index++) {
+        TracJC()
+        Straight100ms()
+    }
+    GripDown2()
+    TracJC_Slow_Stop()
+    Grip()
+    GripUp()
+    UTurn_Left()
+    TracJC()
+    Straight100ms()
+    GotoPut()
+}
 function Show8ADC () {
     Read5ADC()
-    Read3ADC_Back()
     basic.showNumber(L2)
-    basic.pause(5000)
+    basic.pause(2000)
     basic.showNumber(L1)
-    basic.pause(5000)
+    basic.pause(2000)
     basic.showNumber(C)
-    basic.pause(5000)
+    basic.pause(2000)
     basic.showNumber(R1)
-    basic.pause(5000)
+    basic.pause(2000)
     basic.showNumber(R2)
-    basic.pause(5000)
+    basic.pause(2000)
+    Read3ADC_Back()
     basic.showNumber(BL)
-    basic.pause(5000)
+    basic.pause(2000)
     basic.showNumber(BC)
-    basic.pause(5000)
+    basic.pause(2000)
     basic.showNumber(BR)
+    basic.pause(2000)
 }
 function Trac () {
     Read5ADC()
@@ -174,7 +220,7 @@ function Grip () {
 }
 function GripDown () {
     iBIT.MotorStop()
-    iBIT.Servo(ibitServo.SV2, 130)
+    iBIT.Servo(ibitServo.SV2, 100)
     basic.pause(300)
 }
 function TracBack () {
@@ -197,7 +243,7 @@ function TracJC () {
 }
 function GripUp () {
     iBIT.MotorStop()
-    iBIT.Servo(ibitServo.SV2, 35)
+    iBIT.Servo(ibitServo.SV2, 40)
     basic.pause(300)
 }
 function Read5ADC () {
@@ -307,11 +353,16 @@ function Cal_Error () {
         }
     }
 }
+function GripDown2 () {
+    iBIT.MotorStop()
+    iBIT.Servo(ibitServo.SV2, 130)
+    basic.pause(300)
+}
 function Right () {
     iBIT.Spin(ibitSpin.Right, Speed)
 }
 function Can2 () {
-    UTurn_Left()
+    UTurn_Right()
     for (let index = 0; index < 2; index++) {
         TracJC()
         Turn_Left()
@@ -336,8 +387,8 @@ function Can2 () {
     Straight100ms()
     TracJC()
     Turn_Left()
+    GripDown2()
     TracJC_Slow_Stop()
-    GripDown()
     Grip()
     GripUp()
     UTurn_Left()
@@ -367,7 +418,7 @@ function Read3ADC_Back () {
 }
 function TracJC_Stop () {
     Cal_Error()
-    while (error < 100) {
+    while (error < 50) {
         Trac_PID()
         Start = input.runningTime()
         Timer = 0
@@ -395,7 +446,7 @@ function UTurn_Right () {
     while (R2 > Ref_R2) {
         Read5ADC()
     }
-    iBIT.Spin(ibitSpin.Right, Turn_Speed - 20)
+    iBIT.Spin(ibitSpin.Right, Turn_Speed - 40)
     while (R1 > Ref_R1) {
         Read5ADC()
     }
@@ -411,8 +462,8 @@ function Stop () {
     }
 }
 function Initial_Speed () {
-    Base_Left_Speed = Base_Speed - 0
-    Base_Right_Speed = Base_Speed - 3
+    Base_Left_Speed = Base_Speed - 1
+    Base_Right_Speed = Base_Speed - 0
     Max_Speed = Base_Speed
 }
 function GotoPut () {
@@ -424,15 +475,18 @@ function GotoPut () {
         TracJC()
         Turn_Right()
     }
-    TracJC_Stop()
     GripDown()
+    TracJC_Stop()
     Forward()
-    basic.pause(200)
+    basic.pause(100)
+    GripDown2()
     Put()
+    Backward()
+    basic.pause(100)
     GripUp()
 }
 function Backward () {
-    iBIT.Motor2(ibitMotor.Backward, Base_Right_Speed, Base_Left_Speed)
+    iBIT.Motor2(ibitMotor.Backward, Base_Left_Speed, Base_Right_Speed - 4)
 }
 let Max_Speed = 0
 let Right_Speed = 0
@@ -472,21 +526,21 @@ let Kd = 0
 let Kp = 0
 let JC_Delay_Time = 0
 JC_Delay_Time = 35
-Kp = 8
-Kd = 30
+Kp = 12
+Kd = 26
 Ki = 0
 Kt = 10
-Ref_L2 = 3608
-Ref_L1 = 2865
-Ref_C = 3132
-Ref_R1 = 3251
-Ref_R2 = 2424
-Ref_BL = 3852
-RefBC = 3514
-Ref_BR = 3571
-GripDown()
+Ref_L2 = 3682
+Ref_L1 = 2954
+Ref_C = 3324
+Ref_R1 = 3138
+Ref_R2 = 2874
+Ref_BL = 2628
+RefBC = 2637
+Ref_BR = 2668
+GripDown2()
 Grip()
-basic.showIcon(IconNames.Heart)
+basic.showIcon(IconNames.Happy)
 GripUp()
 Put()
 Speed = 60
