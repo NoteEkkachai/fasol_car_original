@@ -216,7 +216,7 @@ function Trac () {
 function Grip () {
     iBIT.MotorStop()
     iBIT.Servo(ibitServo.SV1, 75)
-    basic.pause(300)
+    basic.pause(1000)
 }
 function GripDown () {
     iBIT.MotorStop()
@@ -527,7 +527,7 @@ let Kp = 0
 let JC_Delay_Time = 0
 JC_Delay_Time = 35
 Kp = 12
-Kd = 26
+Kd = 22
 Ki = 0
 Kt = 10
 Ref_L2 = 2800
