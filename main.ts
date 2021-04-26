@@ -530,14 +530,14 @@ Kp = 12
 Kd = 26
 Ki = 0
 Kt = 10
-Ref_L2 = 3682
-Ref_L1 = 2954
-Ref_C = 3324
-Ref_R1 = 3138
-Ref_R2 = 2874
-Ref_BL = 2628
-RefBC = 2637
-Ref_BR = 2668
+Ref_L2 = 2800
+Ref_L1 = 2800
+Ref_C = 2800
+Ref_R1 = 2800
+Ref_R2 = 2800
+Ref_BL = 2800
+RefBC = 2800
+Ref_BR = 2800
 GripDown2()
 Grip()
 basic.showIcon(IconNames.Happy)
